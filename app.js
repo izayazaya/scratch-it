@@ -2,7 +2,7 @@ const canvas = document.getElementById("scratchItCanvas");
 const context = canvas.getContext("2d");
 
 // Size
-const gridSize = 5;
+const gridSize = 3;
 const squareSize = canvas.width / gridSize;
 const grid = [];
 
