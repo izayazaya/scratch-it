@@ -1,31 +1,87 @@
 <!doctype html>
 
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-height, initial-scale=1.0" />
     <title>Scratch-IT</title>
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <link rel="stylesheet" href="styles.css" />
-</head>
+    <link rel="icon" type="image/x-icon" href="./assets/favicon.ico" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
 
-<body>
-    <div class="header">
-        <h1>CIRCUITS</h1>
-        <h2>PICK.IT!</h2>
-    </div>
-    <div class="instructions">
-        <h3>HOW TO PLAY</h3>
-    </div>
-    <div class="mechanics">
-        <h3>EACH TILE HIDES</h3>
-    </div>
-    <div class="playButton">
-        <button id="mainButton" type="button">PLAY</button>
+  <body>
+    <div class="backgroundContainer">
+      <div class="bodyContainer">
+        <custom-header></custom-header>
+        <div class="contentContainer">
+          <div class="instructionContainer">
+            <h3>HOW TO PLAY</h3>
+            <div class="instructions">
+              <div id="amount">
+                <div class="amountNumber">
+                  <img
+                    class="instructionImages"
+                    src="./assets/coin.png"
+                    alt="picture of gold coins"
+                  />
+                  <p class="number">1</p>
+                </div>
+                <div class="amountInstructions">
+                  <p class="contents">
+                    <span class="highlight"
+                      >PAY THE AMOUNT NEEDED TO PLAY THE GAME:</span
+                    >
+                  </p>
+                  <p id="php"><span class="highlight">PHP 15</span></p>
+                </div>
+              </div>
+              <div id="instruction">
+                <div class="amountNumber">
+                  <img
+                    class="instructionImages"
+                    src="./assets/pointer.png"
+                    alt="hand pointer"
+                  />
+                  <p class="number">2</p>
+                </div>
+                <p class="contents">
+                  <span class="highlight"
+                    >HIT PLAY, PICK A SQUARE, WIN A PRIZE—OR LEAVE WITH
+                    NOTHING.</span
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="mechanics">
+            <img id="present" src="./assets/surprise.png" alt="a red giftbox" />
+            <h4><span class="highlight">EACH TILE HIDES</span></h4>
+            <div class="rewards">
+              <div class="leftColumn">
+                <p class="prize"><span class="highlight">FREE LANYARD</span></p>
+                <p class="prize"><span class="highlight">EXTRA CHANCE</span></p>
+                <p class="prize">
+                  <span class="highlight">FREE STRICKER</span>
+                </p>
+                <p class="prize">
+                  <span class="highlight">ABSOLUTELY NOTHING</span>
+                </p>
+              </div>
+              <div class="rightColumn">
+                <p class="tile">1 TILE</p>
+                <p class="tile">2 TILES</p>
+                <p class="tile">2 TILES</p>
+                <p class="tile">4 TILES</p>
+              </div>
+            </div>
+          </div>
+          <button id="mainButton" type="button">PLAY</button>
+          <custom-footer></custom-footer>
+        </div>
+      </div>
     </div>
 
-    <script src="button.js"></script>
-</body>
-
+    <script src="./button.js"></script>
+    <script src="./headerFooter.js"></script>
+  </body>
 </html>

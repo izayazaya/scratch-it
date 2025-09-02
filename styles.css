@@ -1,0 +1,310 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    text-align: center;
+}
+
+.backgroundContainer {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('assets/circuits-logo.png');
+    background-size: 100px;
+    background-repeat: repeat;
+    background-position: 0 0;
+    animation: moveBackground 10s linear infinite;
+}
+
+@keyframes moveBackground {
+    from {
+        background-position: 0 0;
+    }
+    to {
+        background-position: 33% 0;
+    }
+}
+
+.bodyContainer {
+    width: 500px;
+    margin: auto;
+    border: 1px solid black;
+    background-color: white;
+}
+
+.parentContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.header {
+    display: flex;
+    background-color: #000027;
+    border: 2px solid #f8e8a4;
+}   
+
+#logo {
+    height: 74px;
+    width: 74px;
+    padding: 2px 2px;
+}
+
+.innerheader {
+    margin: 16px;
+}
+
+h1, h2 {
+    font-size: 32px;
+    margin: 8px 127.25px;
+    padding: 6px;
+    line-height: 8px;
+    text-align: center;
+}
+
+h1 {
+    color: #f8e8a4;
+}
+
+h2 {
+    color: #fafdfe;
+}
+
+.contentContainer {
+    padding: 16px;
+}
+
+h3 {
+    font-size: 32px;
+    margin: 4px;
+    line-height: 48px;
+}
+
+.instructionContainer {
+    
+}
+
+.instructions {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#amount {
+    display: flex;
+    flex: 1;
+}
+
+.amountNumber {
+    margin: 0 8px 0 0;
+}
+
+#instruction {
+    display: flex;
+    flex: 1;
+}
+
+.instructionImages {
+    width: 40px;
+    height: 40px;
+}
+
+.number {
+    color: #2e0000;
+    font-size: 32px;
+    margin: -16px 0 0 14px;
+    padding: 0;
+    background-color: #fd5655;
+    border-radius: 20px;
+    position: relative;
+}
+
+#instruction .amountNumber .number {
+    background-color: #2acb7d;
+}
+
+.amountInstructions {
+}
+
+.highlight {
+    background-color: #2acb7d;
+}
+
+.amountInstructions .highlight {
+    background-color: #fd5655;
+}
+
+.contents, #php {
+    font-size: 14px;
+    text-align: left;
+}
+
+.contents {
+    margin: 24px 0 0 0;
+    color: #2e0000;
+}
+
+#php {
+    color: #fede62;
+}
+
+#present {
+    width: 60px;
+    height: 60px;
+}
+
+h4 {
+    font-size: 24px;
+    margin: 0 0 12px 0;
+    padding: 0;
+    line-height: 8px;
+}
+
+h4 .highlight {
+    background-color: #fede62;
+}
+
+ul {
+    list-style-type: none;
+}
+
+.rewards {
+    display: flex;
+    line-height: 16px;
+    justify-content: space-between;
+    background-color: #000027;
+    border: 2px solid #fede62;
+    margin: 0 64px 16px 64px;
+}
+
+.leftColumn {
+    flex: 0.7;
+    text-align: left;
+    padding: 0 16px;
+}
+
+.rightColumn {
+    flex: 0.3;
+    text-align: right;
+    padding: 0 16px;
+}
+
+.prize {
+
+}
+
+.prize .highlight {
+    background-color: #fede62;
+    border-radius: 2px;
+}
+
+.tile {
+    color: #fafdfe;
+}
+
+#mainButton {
+    font-size: 48px;
+    margin: 0 0 16px 0;
+    padding: 0px 32px;
+    background-color: #fe5859;
+    color: #fafdfe;
+    border-radius: 16px;
+    border: 2px solid #fede62;
+    transition-duration: 0.1s;
+    cursor: pointer;
+    box-shadow: 0 8px #999;
+}
+
+#mainButton:hover {
+    background-color: #ff6960;
+}
+
+#mainButton:active {
+    box-shadow: 0 1px #666;
+    transform: translateY(8px);
+}
+
+#overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    pointer-events: auto;
+}
+
+#popup {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 1000;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+#popupTitle {
+
+}
+
+#popupMessage {
+
+}
+
+#resetButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#gameResult {
+    margin: 20px auto;
+    padding: 20px;
+    border: 2px solid black;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    max-width: 400px;
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+.messageOne {
+
+}
+
+.messageTwo {
+
+}
+
+.messageThree {
+
+}
+
+.messageFour {
+
+}
+
+#endImage {
+    max-width: 200px;
+    max-height: 200px;
+    margin: 20px auto;
+    display: block;
+}
+
+#finishButton {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+#footer {
+    color: #777777;
+}
