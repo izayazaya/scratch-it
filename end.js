@@ -9,6 +9,9 @@ document.addEventListener("DOMContentLoaded", () => {
     let messageThree = "";
     let messageFour = "";
     let imageSrc = tile;
+    let messageOneClass = "";
+    let messageTwoClass = "";
+
     if (tile && (tile.includes("assets/lanyard.png") || tile.includes("assets/sticker.png"))) {
         messageOne = "CONGRATULATIONS!";
         messageTwo = "YOU WON!";
@@ -18,17 +21,25 @@ document.addEventListener("DOMContentLoaded", () => {
         } else if (tile.includes("assets/sticker.png")) {
             messageFour = "STICKER";
         }
+        messageOneClass = "winText";
+        messageTwoClass = "winText";
     } else if (tile && tile.includes("assets/try-again.png")) {
         messageOne = "WOMP WOMP,";
-        messageTwo = "BETTER LUCK NEXT TIME!";
+        messageTwo = "BETTER LUCK</br>NEXT TIME!";
+        messageOneClass = "loseText";
+        messageTwoClass = "loseText";
     }
 
     container.innerHTML = `
-        <p class="messageOne">${messageOne}</p>
-        <img id="endImage" src="${imageSrc}">
-        <p class="messageTwo">${messageTwo}</p>
-        <p class="messageThree">${messageThree}</p>
-        <p class="messageFour">${messageFour}</p>
+        <div class="endContainer">
+            <p class="messageOne ${messageOneClass}">${messageOne}</p>
+            <img id="endImage" src="${imageSrc}">
+            <p class="messageTwo ${messageTwoClass}">${messageTwo}</p>
+        </div>
+        ${tile && (tile.includes("assets/lanyard.png") || tile.includes("assets/sticker.png")) ? `
+            <p class="messageThree">${messageThree}</p>
+            <p class="messageFour">${messageFour}</p>
+        ` : ''}
         <button id="finishButton">FINISH</button>
     `;
 

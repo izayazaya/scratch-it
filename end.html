@@ -1,17 +1,24 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>End</title>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
 
-  <body>
-    <custom-header></custom-header>
-    <div id="gameResult"></div>
-    <custom-footer></custom-footer>
-    <script src="./end.js"></script>
-    <script src="./headerFooter.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>End</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+
+<body>
+  <div class="backgroundContainer">
+    <div class="bodyContainer">
+      <custom-header></custom-header>
+      <div id="gameResult"></div>
+      <custom-footer></custom-footer>
+    </div>
+  </div>
+  <script src="./end.js"></script>
+  <script src="./headerFooter.js"></script>
+  <script src="./background.js" defer></script>
+</body>
+
 </html>

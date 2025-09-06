@@ -1,3 +1,5 @@
 Online Scratch-It
 
-Highly customizable!
+Created for the BUCS CBO CircuITs
+
+Gamba amirite?

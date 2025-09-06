@@ -23,13 +23,14 @@ document.addEventListener("DOMContentLoaded", () => {
     const canvas = document.getElementById("scratchItCanvas");
     const context = canvas.getContext("2d");
 
-    // Size and gap
+    // Variables idk
     const gridSize = 3;
-    const gapSize = 10;
+    const gapSize = 20;
     const totalGapWidth = (gridSize - 1) * gapSize;
     const squareSize = (canvas.width - totalGapWidth) / gridSize;
     let grid = [];
     let isProcessing = false;
+    const luckySpecialist = new Audio('assets/sfx/lucky-specialist.mp3');
 
     // Define reward distribution
     const rewardDistribution = [
@@ -66,7 +67,10 @@ document.addEventListener("DOMContentLoaded", () => {
                     x: i * (squareSize + gapSize), 
                     y: j * (squareSize + gapSize),
                     revealed: false,
-                    imageSrc: imageAssignments[index]
+                    imageSrc: imageAssignments[index],
+                    hover: false,
+                    flipping: false,
+                    opacity: 1 // Fade-out animation
                 });
             }
         }
@@ -77,7 +81,15 @@ document.addEventListener("DOMContentLoaded", () => {
     function drawGrid() {
         context.clearRect(0, 0, canvas.width, canvas.height);
         for (const square of grid) {
-            if (square.revealed) {
+            if (square.flipping) {
+                const overlayImg = images.find(image => image.src.endsWith("assets/circuits-logo.png"));
+                if (overlayImg) {
+                    context.save();
+                    context.globalAlpha = square.opacity; // Fade-out effect
+                    context.drawImage(overlayImg, square.x, square.y, squareSize, squareSize);
+                    context.restore();
+                }
+            } else if (square.revealed) {
                 const img = images.find(image => image.src.endsWith(square.imageSrc));
                 if (img) {
                     context.drawImage(img, square.x, square.y, squareSize, squareSize);
@@ -85,10 +97,16 @@ document.addEventListener("DOMContentLoaded", () => {
             } else {
                 const overlayImg = images.find(image => image.src.endsWith("assets/circuits-logo.png"));
                 if (overlayImg) {
+                    context.save();
+                    if (square.hover && !square.flipping) {
+                        context.filter = 'brightness(150%)'; // Increase brightness to 150% while hovering
+                    }
                     context.drawImage(overlayImg, square.x, square.y, squareSize, squareSize);
+                    context.restore();
                 }
             }
-            context.strokeStyle = "black";
+            context.strokeStyle = "gold";
+            context.lineWidth = 2;
             context.strokeRect(square.x, square.y, squareSize, squareSize);
         }
     }
@@ -97,10 +115,10 @@ document.addEventListener("DOMContentLoaded", () => {
     function animateShuffle() {
         let animationFrame;
         let timeElapsed = 0;
-        const duration = 800; 
+        const duration = 400; 
         const allTiles = grid.map(tile => ({ ...tile, targetX: tile.x, targetY: tile.y }));
 
-        // Unreveal the 1up tile immediately
+        // Unreveal the 1up tile immediately after pressing run it back
         const revealedTile = grid.find(square => square.revealed);
         if (revealedTile) {
             revealedTile.revealed = false;
@@ -123,8 +141,8 @@ document.addEventListener("DOMContentLoaded", () => {
             if (progress < 1) {
                 // Interpolate positions toward target
                 allTiles.forEach(tile => {
-                    tile.x += (tile.targetX - tile.x) * 0.1;
-                    tile.y += (tile.targetY - tile.y) * 0.1;
+                    tile.x += (tile.targetX - tile.x) * 0.2;
+                    tile.y += (tile.targetY - tile.y) * 0.2;
                 });
                 // Redraw with interpolated positions
                 context.clearRect(0, 0, canvas.width, canvas.height);
@@ -133,7 +151,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     if (overlayImg) {
                         context.drawImage(overlayImg, tile.x, tile.y, squareSize, squareSize);
                     }
-                    context.strokeStyle = "black";
+                    context.strokeStyle = "gold";
                     context.strokeRect(tile.x, tile.y, squareSize, squareSize);
                 });
                 animationFrame = requestAnimationFrame(animate);
@@ -156,7 +174,7 @@ document.addEventListener("DOMContentLoaded", () => {
     popup.innerHTML = `
         <p id="popupTitle"></p>
         <p id="popupMessage"></p>
-        <button id="resetButton">RUN IT BACK</button>
+        <button id="resetButton">RUN IT BACK!</button>
     `;
     document.body.appendChild(popup);
 
@@ -164,28 +182,54 @@ document.addEventListener("DOMContentLoaded", () => {
     resetButton.addEventListener("click", () => {
         popup.style.display = "none"; 
         overlay.style.display = "none"; 
+        luckySpecialist.pause();
+        luckySpecialist.currentTime = 0;
         // Unreveal the 1up tile before animation
         const revealedTile = grid.find(square => square.revealed);
         if (revealedTile) {
             revealedTile.revealed = false;
-            drawGrid(); // Update display immediately
+            drawGrid(); 
         }
-        animateShuffle(); // Trigger shuffling animation
+        animateShuffle(); // Start shuffling animation
     });
 
     window.addEventListener("pageshow", (event) => {
         if (event.persisted) {
             initializeGrid();
             drawGrid();
-            isProcessing = false; // Reset isProcessing to enable clicks
+            isProcessing = false; // Reset to false to enable clicks
         }
     });
 
+    // Hover effect
+    canvas.addEventListener("mousemove", function(event) {
+        const mouseX = event.clientX - canvas.getBoundingClientRect().left;
+        const mouseY = event.clientY - canvas.getBoundingClientRect().top;
+
+        grid.forEach(square => {
+            square.hover = false;
+        });
+
+        const hoveredSquare = grid.find(
+            (square) =>
+                mouseX >= square.x && mouseX <= square.x + squareSize &&
+                mouseY >= square.y && mouseY <= square.y + squareSize
+        );
+
+        if (hoveredSquare && !hoveredSquare.revealed && !isProcessing) {
+            hoveredSquare.hover = true;
+        }
+
+        drawGrid();
+    });  
+
+    // Click event with fade-out animation, sound, and confetti
     canvas.addEventListener("click", function(event) {
         event.preventDefault();
         event.stopPropagation();
         const mouseX = event.clientX - canvas.getBoundingClientRect().left;
         const mouseY = event.clientY - canvas.getBoundingClientRect().top;
+
         const clickedSquare = grid.find(
             (square) =>
                 mouseX >= square.x && mouseX <= square.x + squareSize &&
@@ -193,28 +237,123 @@ document.addEventListener("DOMContentLoaded", () => {
         );
 
         if (clickedSquare && !clickedSquare.revealed && !isProcessing) {
-            clickedSquare.revealed = true;
+            isProcessing = true; 
+            clickedSquare.flipping = true;
+            clickedSquare.opacity = 1; // Reset opacity for animation
             drawGrid();
-            isProcessing = true; // Lock out all further clicks
-            if (clickedSquare.imageSrc.includes("assets/1up.png")) {
-                setTimeout(() => {
-                    document.getElementById("popupTitle").textContent = "LUCKY!";
-                    document.getElementById("popupMessage").textContent = "YOU PULLED A 1UP! YOU GET ANOTHER SHOT!";
-                    popup.style.display = "block";
-                    overlay.style.display = "block";
-                    isProcessing = false; // Re-enable clicks after popup
-                }, 5000);
-            } else {
-                const redirectUrl = `./end.html?tile=${encodeURIComponent(clickedSquare.imageSrc)}`;
-                setTimeout(() => {
-                    try {
-                        location.href = redirectUrl;
-                    } catch (error) {
-                        alert("Redirect to end.html failed. Check console for details.");
-                        isProcessing = false;
+
+            const flipSound = new Audio('assets/sfx/flip-sound.mp3');
+            flipSound.play();
+
+            // Fade-out animation
+            let fadeStart = performance.now();
+            function animateFade(currentTime) {
+                if (!fadeStart) fadeStart = currentTime;
+                const progress = Math.min((currentTime - fadeStart) / 500, 1);
+                clickedSquare.opacity = 1 - progress; // Fade from 1 to 0
+                drawGrid();
+
+                if (progress < 1) {
+                    requestAnimationFrame(animateFade);
+                } else {
+                    clickedSquare.flipping = false;
+                    clickedSquare.revealed = true;
+                    drawGrid();
+
+                    luckySpecialist.volume = 0.6;
+                    if (clickedSquare.imageSrc.includes("assets/lanyard.png")) {
+                        bigConfetti(); // Big confetti for lanyard
+                        luckySpecialist.play();
+                    } else if (clickedSquare.imageSrc.includes("assets/sticker.png") || clickedSquare.imageSrc.includes("assets/1up.png")) {
+                        smallConfetti(); // Small confetti for sticker or 1up
+                        luckySpecialist.play();
+                    } else if (clickedSquare.imageSrc.includes("assets/try-again.png")) {
+                        const cricketSound = new Audio('assets/sfx/cricket-sound.mp3');
+                        cricketSound.play(); // Cricket sound for try-again
                     }
-                }, 5000);
+
+                    setTimeout(() => {
+                        if (clickedSquare.imageSrc.includes("assets/1up.png")) {
+                            document.getElementById("popupTitle").textContent = "LUCKY!";
+                            document.getElementById("popupMessage").textContent = "YOU PULLED A 1UP TILE! YOU GET ANOTHER SHOT!";
+                            popup.style.display = "block";
+                            overlay.style.display = "block";
+                            isProcessing = false; // Unlock only after run it back has been pressed
+                        } else {
+                            const redirectUrl = `./end.html?tile=${encodeURIComponent(clickedSquare.imageSrc)}`;
+                            location.href = redirectUrl;
+                        }
+                    }, 4500); // 4.5 second delay
+                }
             }
+            requestAnimationFrame(animateFade);
         }
     });
+
+    // Confetti functions
+    function confetti(options) {
+        const canvas = document.createElement("canvas");
+        canvas.style.position = "fixed";
+        canvas.style.top = "0";
+        canvas.style.left = "0";
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
+        canvas.style.pointerEvents = "none";
+        canvas.style.zIndex = "1001";
+        document.body.appendChild(canvas);
+
+        const ctx = canvas.getContext("2d");
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particles = [];
+        const particleCount = options.particleCount || 100;
+        const spread = options.spread || 60;
+        const origin = { x: 0.5, y: 0 }; // Start from the top center
+
+        for (let i = 0; i < particleCount; i++) {
+            particles.push({
+                x: canvas.width * (Math.random() * 0.8 + 0.1), // Spread across 80% of width
+                y: canvas.height * origin.y,
+                angle: Math.random() * Math.PI * 2,
+                speed: Math.random() * 5 + 2,
+                size: Math.random() * 10 + 5,
+                color: `hsl(${Math.random() * 360}, 100%, 50%)`
+            });
+        }
+
+        function animateConfetti() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            let allDone = true;
+            particles.forEach(particle => {
+                particle.x += Math.cos(particle.angle) * particle.speed;
+                particle.y += Math.sin(particle.angle) * particle.speed + 3; // Number is gravity
+                particle.size *= 0.98; // Shrink
+
+                if (particle.size > 0.2) {
+                    ctx.beginPath();
+                    ctx.arc(particle.x, particle.y, particle.size / 2, 0, Math.PI * 2);
+                    ctx.fillStyle = particle.color;
+                    ctx.fill();
+                    allDone = false;
+                }
+            });
+
+            if (!allDone) {
+                requestAnimationFrame(animateConfetti);
+            } else {
+                document.body.removeChild(canvas);
+            }
+        }
+
+        animateConfetti();
+    }
+
+    function bigConfetti() {
+        confetti({ particleCount: 1000, spread: 240, origin: { x: 0.5, y: 0 } });
+    }
+
+    function smallConfetti() {
+        confetti({ particleCount: 200, spread: 120, origin: { x: 0.5, y: 0 } });
+    }
 });

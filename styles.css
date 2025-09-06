@@ -1,19 +1,53 @@
-* {
+:root {
+    --primary-dark: #0a0b39;
+    --primary-light: #fafdfe;
+    --accent-gold: #fede62;
+    --accent-green: #2acb7d;
+    --accent-red-dark: #fd5655;
+    --accent-red-hover: #fd6f6e;
+    --text-dark: #2e0000;
+    --text-gray: #777777;
+    --shadow-color: #00000033;
+    --white: #ffffff
+}
+
+@font-face {
+    font-family: 'ari';
+    src: url(./assets/ari_w9500/ari-w9500.ttf);
+    font-weight: 100;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ari';
+    src: url(./assets/ari_w9500/ari-w9500-bold.ttf);
+    font-weight: 500;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'ari';
+    src: url(./assets/ari_w9500/ari-w9500-display.ttf);
+    font-weight: 900;
+    font-style: normal;
+}
+
+html {
+    font-family: ari;
+    font-size: 62.5%; 
+    font-weight: 100;
+    letter-spacing: 0.2rem;
     box-sizing: border-box;
+}
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
 body {
     text-align: center;
-}
-
-.backgroundContainer {
-    width: 100vw;
-    height: 100vh;
-    background-image: url('assets/circuits-logo.png');
-    background-size: 100px;
-    background-repeat: repeat;
-    background-position: 0 0;
-    animation: moveBackground 10s linear infinite;
+    margin: 0;
+    min-height: 100vh;
 }
 
 @keyframes moveBackground {
@@ -21,15 +55,60 @@ body {
         background-position: 0 0;
     }
     to {
-        background-position: 33% 0;
+        background-position: 100% 0;
     }
 }
 
+.backgroundContainer {
+    width: 100vw;
+    height: 100vh;
+    background-image: url('assets/circuits-logo-bg.png');
+    background-size: 10%;
+    background-repeat: repeat;
+    background-position: 0 0;
+    animation: moveBackground 60s linear infinite;
+    padding: 2.4rem;
+    position: relative;
+    z-index: 0;
+}
+
+.backgroundContainer.noAnimation {
+    animation-play-state: paused;
+}
+
+.backgroundContainer.solidColor {
+    background-image: none;
+    background-color: var(--primary-dark);
+}
+
 .bodyContainer {
-    width: 500px;
-    margin: auto;
-    border: 1px solid black;
-    background-color: white;
+    position: relative;
+    z-index: 1;
+    width: 60rem;
+    margin: 2.4rem auto;
+    border: 0.1rem solid var(--text-dark);
+    background-color: var(--primary-light);
+}
+
+.toggleButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    width: 5rem;
+    height: 5rem;
+    padding: 0.8rem;
+    font-size: 2rem;
+    background-color: var(--primary-dark);
+    color: var(--primary-light);
+    border: 0.2rem solid var(--white);
+    border-radius: 0.8rem;
+    cursor: pointer;
+    z-index: 10;
+    box-shadow: 0 0.4rem 0.8rem var(--shadow-color);
+}
+
+.toggleButton:hover {
+    filter: brightness(150%);
 }
 
 .parentContainer {
@@ -40,53 +119,115 @@ body {
 
 .header {
     display: flex;
-    background-color: #000027;
-    border: 2px solid #f8e8a4;
-}   
-
-#logo {
-    height: 74px;
-    width: 74px;
-    padding: 2px 2px;
-}
-
-.innerheader {
-    margin: 16px;
-}
-
-h1, h2 {
-    font-size: 32px;
-    margin: 8px 127.25px;
-    padding: 6px;
-    line-height: 8px;
-    text-align: center;
-}
-
-h1 {
-    color: #f8e8a4;
-}
-
-h2 {
-    color: #fafdfe;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--primary-dark);
+    border: 0.2rem solid var(--accent-gold);
+    width: 100%;
 }
 
 .contentContainer {
-    padding: 16px;
+    padding: 0 2.4rem;
+}
+
+h1, h2, h3, h4 {
+    margin: 0;
+    padding: 0.6rem;
+    line-height: 0.8rem;
+    text-align: center;
+}
+
+.circuits {
+    font-size: 4.2rem;
+    font-weight: 900;
+    margin: 1.8rem 17.5rem;
+    color: var(--accent-gold);
+    animation: glow 1s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+    from {
+        text-shadow: 0 0 0.1rem var(--white), 0 0 0.2rem var(--white), 0 0 0.3rem var(--white), 0 0 0.4rem var(--white), 0 0 0.5rem var(--white);
+    }
+    
+    to {
+        text-shadow: 0 0 0.2rem var(--white), 0 0 0.3rem var(--white), 0 0 0.4rem var(--white), 0 0 0.5rem var(--white), 0 0 0.6rem var(--white);
+    }
+}
+
+
+hr {
+    border: none;
+    height: 0.1rem;
+    width: 100%;
+    background-color: var(--accent-gold);
+}
+
+.pickIt {
+    font-size: 3.8rem;
+    font-weight: 100;
+    margin: 1.5rem;
+    color: var(--primary-light);
+    text-shadow: 0 0 0.6rem var(--white);
 }
 
 h3 {
-    font-size: 32px;
-    margin: 4px;
-    line-height: 48px;
+    font-size: 3.6rem;
+    font-weight: 500;
+    margin: 0.4rem;
+    line-height: 4.8rem;
+    text-shadow: 0.3rem 0.3rem 0 var(--shadow-color);
 }
 
-.instructionContainer {
-    
+h4 {
+    font-size: 3.2rem;
+    font-weight: 100;
+    margin: 0 0 1rem 0;
+    line-height: 0.8rem;
+    text-shadow: 0.3rem 0.3rem 0 var(--shadow-color);
+}
+
+.contents, #php {
+    font-size: 1.8rem;
+    margin: 1rem 0;
+    text-align: left;
+}
+
+.contents {
+    margin: 2.4rem 0 0 0;
+    color: var(--text-dark);
+}
+
+#php {
+    color: var(--accent-gold);
+}
+
+#footer {
+    color: var(--text-gray);
+    margin: 2rem;
+    font-size: 1.2rem;
+}
+
+#logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 11.1rem; 
+    width: 11.1rem; 
+    padding: 0.2rem;
+}
+
+.innerheader {
+    width: 100%;
+    margin: 0;
 }
 
 .instructions {
     display: flex;
     justify-content: space-evenly;
+    row-gap: 1rem;
+    margin-bottom: 0;
+    padding-bottom: 0;
 }
 
 #amount {
@@ -95,7 +236,7 @@ h3 {
 }
 
 .amountNumber {
-    margin: 0 8px 0 0;
+    margin: 0 0.8rem 0 0;
 }
 
 #instruction {
@@ -104,123 +245,103 @@ h3 {
 }
 
 .instructionImages {
-    width: 40px;
-    height: 40px;
+    width: 5.2rem;
+    height: 5.2rem;
 }
 
 .number {
-    color: #2e0000;
-    font-size: 32px;
-    margin: -16px 0 0 14px;
-    padding: 0;
-    background-color: #fd5655;
-    border-radius: 20px;
+    color: var(--text-dark);
+    font-size: 3.4rem;
+    font-weight: 500;
+    margin: -2rem 0 0 1.4rem;
+    padding: 0.4rem 0.8rem;
+    background-color: var(--accent-red-dark);
+    border-radius: 2rem;
     position: relative;
 }
 
 #instruction .amountNumber .number {
-    background-color: #2acb7d;
-}
-
-.amountInstructions {
-}
-
-.highlight {
-    background-color: #2acb7d;
-}
-
-.amountInstructions .highlight {
-    background-color: #fd5655;
-}
-
-.contents, #php {
-    font-size: 14px;
-    text-align: left;
-}
-
-.contents {
-    margin: 24px 0 0 0;
-    color: #2e0000;
-}
-
-#php {
-    color: #fede62;
+    background-color: var(--accent-green);
 }
 
 #present {
-    width: 60px;
-    height: 60px;
-}
-
-h4 {
-    font-size: 24px;
-    margin: 0 0 12px 0;
-    padding: 0;
-    line-height: 8px;
-}
-
-h4 .highlight {
-    background-color: #fede62;
-}
-
-ul {
-    list-style-type: none;
+    width: 8rem;
+    height: 8rem;
 }
 
 .rewards {
     display: flex;
-    line-height: 16px;
+    line-height: 1.6rem;
     justify-content: space-between;
-    background-color: #000027;
-    border: 2px solid #fede62;
-    margin: 0 64px 16px 64px;
+    background-color: var(--primary-dark);
+    border: 0.2rem solid var(--accent-gold);
+    margin: 0 8.4rem 1.6rem 8.4rem;
+    padding: 0.6rem;
 }
 
 .leftColumn {
     flex: 0.7;
     text-align: left;
-    padding: 0 16px;
+    padding: 0 1rem;
+    align-content: space-evenly;
 }
 
 .rightColumn {
     flex: 0.3;
     text-align: right;
-    padding: 0 16px;
-}
-
-.prize {
-
-}
-
-.prize .highlight {
-    background-color: #fede62;
-    border-radius: 2px;
+    padding: 0 1rem;
+    align-content: space-evenly;
 }
 
 .tile {
-    color: #fafdfe;
+    color: var(--primary-light);
+    font-size: 1.6rem;
 }
 
 #mainButton {
-    font-size: 48px;
-    margin: 0 0 16px 0;
-    padding: 0px 32px;
-    background-color: #fe5859;
-    color: #fafdfe;
-    border-radius: 16px;
-    border: 2px solid #fede62;
+    font-size: 4.8rem;
+    font-family: ari;
+    font-weight: 500;
+    margin: 0 0 1.6rem 0;
+    padding: 0 3.2rem;
+    background-color: var(--accent-red-dark);
+    color: var(--primary-light);
+    border-radius: 1.6rem;
+    border: 0.2rem solid var(--accent-gold);
     transition-duration: 0.1s;
     cursor: pointer;
-    box-shadow: 0 8px #999;
+    box-shadow: 0 0.8rem var(--text-gray);
+    text-shadow: 0.3rem 0.3rem 0 var(--shadow-color);
 }
 
 #mainButton:hover {
-    background-color: #ff6960;
+    background-color: var(--accent-red-hover);
 }
 
 #mainButton:active {
-    box-shadow: 0 1px #666;
-    transform: translateY(8px);
+    box-shadow: 0 0.1rem var(--text-gray);
+    transform: translateY(0.8rem);
+}
+
+.highlight {
+    background-color: var(--accent-green);
+}
+
+.amountInstructions .highlight {
+    background-color: var(--accent-red-dark);
+}
+
+h4 .highlight {
+    background-color: var(--accent-gold);
+}
+
+.prize .highlight {
+    background-color: var(--accent-gold);
+    border-radius: 0.15rem;
+}
+
+.prize {
+    font-size: 1.6rem;
 }
 
 #overlay {
@@ -230,7 +351,7 @@ ul {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.5);
+    background: var(--shadow-color);
     z-index: 999;
     pointer-events: auto;
 }
@@ -238,73 +359,132 @@ ul {
 #popup {
     display: none;
     position: fixed;
+    max-width: 40rem;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: white;
-    padding: 20px;
-    border: 2px solid black;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    padding: 1rem;
+    border: 0.2rem solid var(--accent-gold);
+    border-radius: 0.8rem;
+    background-color: var(--white);
+    box-shadow: 0 0.4rem 0.8rem var(--shadow-color);
     z-index: 1000;
     text-align: center;
-    font-family: Arial, sans-serif;
 }
 
 #popupTitle {
-
+    font-size: 3.2rem;
+    margin: 0 0.2rem 1.4rem 0.2rem;
+    color: var(--accent-green);
+    text-shadow: 0.3rem 0.3rem 0 var(--shadow-color);
 }
 
 #popupMessage {
-
+    font-size: 3.2rem;
+    margin: 0 0.2rem 2rem 0.2rem;
+    color: var(--accent-red-dark);
+    text-shadow: 0.3rem 0.3rem 0 var(--shadow-color);
 }
 
 #resetButton {
-    padding: 10px 20px;
-    font-size: 16px;
+    padding: 1rem 2rem;
+    margin-bottom: 1rem;
+    font-size: 2.4rem;
+    font-family: ari;
+    font-weight: 500;
+    color: var(--primary-light);
+    background-color: var(--accent-red-dark);
+    border-radius: 3.2rem;
+    border: 0.2rem solid var(--accent-gold);
     cursor: pointer;
+    transition-duration: 0.1s;
+    box-shadow: 0 0.8rem var(--text-gray);
+    text-shadow: 0.3rem 0.3rem 0 var(--shadow-color);
+}
+
+#resetButton:hover {
+    background-color: var(--accent-red-hover);
+}
+
+#resetButton:active {
+    box-shadow: 0 0.1rem var(--text-gray);
+    transform: translateY(0.8rem);
 }
 
 #gameResult {
-    margin: 20px auto;
-    padding: 20px;
-    border: 2px solid black;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-    max-width: 400px;
     text-align: center;
-    font-family: Arial, sans-serif;
 }
 
-.messageOne {
-
+.endContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 4rem auto;
+    width: 40rem;
+    height: 40rem;
+    border-radius: 100rem;
+    border: 0.3rem solid var(--accent-gold);
+    background-color: var(--primary-dark);
 }
 
-.messageTwo {
+.winText {
+    color: var(--accent-gold);
+    text-shadow: 0 0 0.6rem var(--accent-gold);
+}
 
+.loseText {
+    color: var(--accent-red-dark);
+    text-shadow: 0 0 0.6rem var(--accent-red-dark);
+}
+
+.messageOne, .messageTwo, .messageThree, .messageFour {
+    font-size: 2rem; 
+    margin: 0;
+    line-height: 3.5rem;
 }
 
 .messageThree {
-
+    font-size: 3.2rem; 
+    margin-top: -1rem;
+    text-shadow: 0.3rem 0.3rem 0 var(--shadow-color);
 }
 
 .messageFour {
-
+    font-size: 3.2rem; 
+    font-weight: 900;
+    margin-bottom: 3rem;
+    color: var(--accent-red-dark);
+    text-shadow: 0.3rem 0.3rem 0 var(--shadow-color);
 }
 
 #endImage {
-    max-width: 200px;
-    max-height: 200px;
-    margin: 20px auto;
+    max-width: 20rem;
+    max-height: 20rem;
+    margin: 2rem auto;
     display: block;
 }
 
 #finishButton {
-    padding: 10px 20px;
-    font-size: 16px;
+    font-family: ari;
+    font-size: 3.8rem;
+    font-weight: 500;
+    margin: 0 0 1.6rem 0;
+    padding: 0.2rem 3.2rem;
+    background-color: var(--accent-red-dark);
+    color: var(--primary-light);
+    border-radius: 3.2rem;
+    border: 0.2rem solid var(--accent-gold);
+    transition-duration: 0.1s;
     cursor: pointer;
+    box-shadow: 0 0.8rem var(--text-gray);
+    text-shadow: 0.3rem 0.3rem 0 var(--shadow-color);
 }
 
-#footer {
-    color: #777777;
+#finishButton:hover {
+    background-color: var(--accent-red-hover);
+}
+
+#finishButton:active {
+    box-shadow: 0 0.1rem var(--text-gray);
+    transform: translateY(0.8rem);
 }
