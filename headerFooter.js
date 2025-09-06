@@ -26,7 +26,12 @@ class CustomHeader extends HTMLElement {
 class CustomFooter extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
-          <p id="footer">© 2025 CircuITs</p>
+          <div class="footerSection">
+            <a class="githubLink" href="https://github.com/izayazaya/scratch-it/" target="_blank">
+              <div class="githubContainer"><img id="github" src="./assets/github.png" alt="github logo"/></div>
+            </a>
+            <p id="footer">© 2025 <a class="footerCircuits" href="https://www.facebook.com/bucscircuits" target="_blank">CircuITs</a></p>
+          </div>
         `
     }
 }
