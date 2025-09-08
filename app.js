@@ -4,7 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
         "assets/lanyard.png",
         "assets/try-again.png",
         "assets/sticker.png",
-        "assets/circuits-logo.png"
+        "assets/default.png"
     ];
 
     const images = [];
@@ -82,7 +82,7 @@ document.addEventListener("DOMContentLoaded", () => {
         context.clearRect(0, 0, canvas.width, canvas.height);
         for (const square of grid) {
             if (square.flipping) {
-                const overlayImg = images.find(image => image.src.endsWith("assets/circuits-logo.png"));
+                const overlayImg = images.find(image => image.src.endsWith("assets/default.png"));
                 if (overlayImg) {
                     context.save();
                     context.globalAlpha = square.opacity; // Fade-out effect
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     context.drawImage(img, square.x, square.y, squareSize, squareSize);
                 }
             } else {
-                const overlayImg = images.find(image => image.src.endsWith("assets/circuits-logo.png"));
+                const overlayImg = images.find(image => image.src.endsWith("assets/default.png"));
                 if (overlayImg) {
                     context.save();
                     if (square.hover && !square.flipping) {
@@ -147,7 +147,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Redraw with interpolated positions
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 allTiles.forEach(tile => {
-                    const overlayImg = images.find(image => image.src.endsWith("assets/circuits-logo.png"));
+                    const overlayImg = images.find(image => image.src.endsWith("assets/default.png"));
                     if (overlayImg) {
                         context.drawImage(overlayImg, tile.x, tile.y, squareSize, squareSize);
                     }

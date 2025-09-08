@@ -10,10 +10,10 @@ document.addEventListener("DOMContentLoaded", () => {
     let messageFour = "";
     let imageSrc = tile;
     let messageOneClass = "";
-    let messageTwoClass = "";
+    let messageTwoClass = ""; 
 
-    if (tile && (tile.includes("assets/lanyard.png") || tile.includes("assets/sticker.png"))) {
-        messageOne = "CONGRATULATIONS!";
+    if (tile && (tile.includes("assets/lanyard.png") || tile.includes("assets/sticker.png"))) { 
+        messageOne = "CONGRATULATIONS!"; 
         messageTwo = "YOU WON!";
         messageThree = "PRIZE WON:";
         if (tile.includes("assets/lanyard.png")) {
@@ -26,8 +26,8 @@ document.addEventListener("DOMContentLoaded", () => {
     } else if (tile && tile.includes("assets/try-again.png")) {
         messageOne = "WOMP WOMP,";
         messageTwo = "BETTER LUCK</br>NEXT TIME!";
-        messageOneClass = "loseText";
-        messageTwoClass = "loseText";
+        messageOneClass = "loseText"; 
+        messageTwoClass = "loseText"; 
     }
 
     container.innerHTML = `
@@ -42,6 +42,31 @@ document.addEventListener("DOMContentLoaded", () => {
         ` : ''}
         <button id="finishButton">FINISH</button>
     `;
+
+    const endContainer = document.querySelector(".endContainer");
+
+    var endMascot = document.createElement('img');
+    endMascot.id = "endMascot";
+    if (endContainer) {
+        const rect = endContainer.getBoundingClientRect();
+        if (tile && (tile.includes("assets/lanyard.png") || tile.includes("assets/sticker.png"))) { 
+            endMascot.src = "assets/win.png";
+            endMascot.style.position = "absolute";
+            endMascot.style.top = "0";
+            endMascot.style.right = "0";
+            endMascot.style.transform = "translate(45%, 10%)";
+        } else if (tile && tile.includes("assets/try-again.png")) {
+            endMascot.src = "assets/lose.png";
+            endMascot.style.position = "absolute";
+            endMascot.style.bottom = "0";
+            endMascot.style.left = "0";
+            endMascot.style.transform = "translate(120%, 10%)";
+        }
+        endMascot.style.width = "22rem";
+        endMascot.style.height = "22rem";
+        endMascot.style.zIndex = "1001";
+        endContainer.appendChild(endMascot);
+    }
 
     document.getElementById("finishButton").addEventListener("click", () => {
         location.href = "index.html";

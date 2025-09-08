@@ -243,10 +243,10 @@ h4 {
 
 #logo {
     position: absolute;
-    top: 0;
+    top: 0.1rem;
     left: 0;
-    height: 11.1rem; 
-    width: 11.1rem; 
+    height: 10.9rem; 
+    width: 10.9rem; 
     padding: 0.2rem;
 }
 
@@ -449,6 +449,7 @@ h4 .highlight {
 }
 
 .endContainer {
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
