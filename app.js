@@ -24,21 +24,34 @@ document.addEventListener("DOMContentLoaded", () => {
     const context = canvas.getContext("2d");
 
     // Variables idk
-    const gridSize = 3;
-    const gapSize = 20;
+    const gridSize = 4;
+    const gapSize = 10;
     const totalGapWidth = (gridSize - 1) * gapSize;
     const squareSize = (canvas.width - totalGapWidth) / gridSize;
     let grid = [];
     let isProcessing = false;
+    let counterString = Number(localStorage.getItem("count")) || 0;
+    let counter = parseInt(counterString, 10);
     const luckySpecialist = new Audio('assets/sfx/lucky-specialist.mp3');
 
     // Define reward distribution
-    const rewardDistribution = [
-        { src: "assets/lanyard.png", count: 1 },
-        { src: "assets/sticker.png", count: 2 },
-        { src: "assets/1up.png", count: 2 },
-        { src: "assets/try-again.png", count: 4 }
-    ];
+    let rewardDistribution = []; 
+    
+    if(parseInt(counterString, 10) % 15 == 0) {
+        rewardDistribution  = [
+            { src: "assets/lanyard.png", count: 1},
+            { src: "assets/sticker.png", count: 3},
+            { src: "assets/1up.png", count: 3},
+            { src: "assets/try-again.png", count: 9}
+        ]; 
+    } else {
+        rewardDistribution  = [
+            { src: "assets/lanyard.png", count: 0},
+            { src: "assets/sticker.png", count: 3},
+            { src: "assets/1up.png", count: 3},
+            { src: "assets/try-again.png", count: 10}
+        ]; 
+    }
 
     // Shuffle array function 
     function shuffle(array) {
@@ -283,6 +296,9 @@ document.addEventListener("DOMContentLoaded", () => {
                             const redirectUrl = `./end.html?tile=${encodeURIComponent(clickedSquare.imageSrc)}`;
                             location.href = redirectUrl;
                         }
+                        counter++;
+                        console.log(counter);
+                        localStorage.setItem("count", counter);
                     }, 4500); // 4.5 second delay
                 }
             }
