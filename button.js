@@ -1,3 +1,3 @@
 document.getElementById("mainButton").onclick = function(){
-    location.href = "/scratch-it/game"
+    location.href = "/ScratchIT/game"
 }

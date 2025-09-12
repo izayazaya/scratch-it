@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
     const preload = [
-        "/scratch-it/assets/1up.png",
-        "/scratch-it/assets/lanyard.png",
-        "/scratch-it/assets/try-again.png",
-        "/scratch-it/assets/sticker.png",
-        "/scratch-it/assets/default.png"
+        "/ScratchIT/assets/1up.png",
+        "/ScratchIT/assets/lanyard.png",
+        "/ScratchIT/assets/try-again.png",
+        "/ScratchIT/assets/sticker.png",
+        "/ScratchIT/assets/default.png"
     ];
 
     const images = [];
@@ -32,24 +32,24 @@ document.addEventListener("DOMContentLoaded", () => {
     let isProcessing = false;
     let counterString = Number(localStorage.getItem("count")) || 0;
     let counter = parseInt(counterString, 10);
-    const luckySpecialist = new Audio('/scratch-it/assets/sfx/lucky-specialist.mp3');
+    const luckySpecialist = new Audio('/ScratchIT/assets/sfx/lucky-specialist.mp3');
 
     // Define reward distribution
     let rewardDistribution = []; 
     
     if(parseInt(counterString, 10) % 15 == 0) {
         rewardDistribution  = [
-            { src: "/scratch-it/assets/lanyard.png", count: 1},
-            { src: "/scratch-it/assets/sticker.png", count: 3},
-            { src: "/scratch-it/assets/1up.png", count: 3},
-            { src: "/scratch-it/assets/try-again.png", count: 9}
+            { src: "/ScratchIT/assets/lanyard.png", count: 1},
+            { src: "/ScratchIT/assets/sticker.png", count: 3},
+            { src: "/ScratchIT/assets/1up.png", count: 3},
+            { src: "/ScratchIT/assets/try-again.png", count: 9}
         ]; 
     } else {
         rewardDistribution  = [
-            { src: "/scratch-it/assets/lanyard.png", count: 0},
-            { src: "/scratch-it/assets/sticker.png", count: 3},
-            { src: "/scratch-it/assets/1up.png", count: 3},
-            { src: "/scratch-it/assets/try-again.png", count: 10}
+            { src: "/ScratchIT/assets/lanyard.png", count: 0},
+            { src: "/ScratchIT/assets/sticker.png", count: 3},
+            { src: "/ScratchIT/assets/1up.png", count: 3},
+            { src: "/ScratchIT/assets/try-again.png", count: 10}
         ]; 
     }
 
@@ -95,7 +95,7 @@ document.addEventListener("DOMContentLoaded", () => {
         context.clearRect(0, 0, canvas.width, canvas.height);
         for (const square of grid) {
             if (square.flipping) {
-                const overlayImg = images.find(image => image.src.endsWith("/scratch-it/assets/default.png"));
+                const overlayImg = images.find(image => image.src.endsWith("/ScratchIT/assets/default.png"));
                 if (overlayImg) {
                     context.save();
                     context.globalAlpha = square.opacity; // Fade-out effect
@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     context.drawImage(img, square.x, square.y, squareSize, squareSize);
                 }
             } else {
-                const overlayImg = images.find(image => image.src.endsWith("/scratch-it/assets/default.png"));
+                const overlayImg = images.find(image => image.src.endsWith("/ScratchIT/assets/default.png"));
                 if (overlayImg) {
                     context.save();
                     if (square.hover && !square.flipping) {
@@ -160,7 +160,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 // Redraw with interpolated positions
                 context.clearRect(0, 0, canvas.width, canvas.height);
                 allTiles.forEach(tile => {
-                    const overlayImg = images.find(image => image.src.endsWith("/scratch-it/assets/default.png"));
+                    const overlayImg = images.find(image => image.src.endsWith("/ScratchIT/assets/default.png"));
                     if (overlayImg) {
                         context.drawImage(overlayImg, tile.x, tile.y, squareSize, squareSize);
                     }
@@ -255,7 +255,7 @@ document.addEventListener("DOMContentLoaded", () => {
             clickedSquare.opacity = 1; // Reset opacity for animation
             drawGrid();
 
-            const flipSound = new Audio('/scratch-it/assets/sfx/flip-sound.mp3');
+            const flipSound = new Audio('/ScratchIT/assets/sfx/flip-sound.mp3');
             flipSound.play();
 
             // Fade-out animation
@@ -274,26 +274,26 @@ document.addEventListener("DOMContentLoaded", () => {
                     drawGrid();
 
                     luckySpecialist.volume = 0.6;
-                    if (clickedSquare.imageSrc.includes("/scratch-it/assets/lanyard.png")) {
+                    if (clickedSquare.imageSrc.includes("/ScratchIT/assets/lanyard.png")) {
                         bigConfetti(); // Big confetti for lanyard
                         luckySpecialist.play();
-                    } else if (clickedSquare.imageSrc.includes("/scratch-it/assets/sticker.png") || clickedSquare.imageSrc.includes("/scratch-it/assets/1up.png")) {
+                    } else if (clickedSquare.imageSrc.includes("/ScratchIT/assets/sticker.png") || clickedSquare.imageSrc.includes("/ScratchIT/assets/1up.png")) {
                         smallConfetti(); // Small confetti for sticker or 1up
                         luckySpecialist.play();
-                    } else if (clickedSquare.imageSrc.includes("/scratch-it/assets/try-again.png")) {
-                        const cricketSound = new Audio('/scratch-it/assets/sfx/cricket-sound.mp3');
+                    } else if (clickedSquare.imageSrc.includes("/ScratchIT/assets/try-again.png")) {
+                        const cricketSound = new Audio('/ScratchIT/assets/sfx/cricket-sound.mp3');
                         cricketSound.play(); // Cricket sound for try-again
                     }
 
                     setTimeout(() => {
-                        if (clickedSquare.imageSrc.includes("/scratch-it/assets/1up.png")) {
+                        if (clickedSquare.imageSrc.includes("/ScratchIT/assets/1up.png")) {
                             document.getElementById("popupTitle").textContent = "LUCKY!";
                             document.getElementById("popupMessage").textContent = "YOU PULLED A 1UP TILE! YOU GET ANOTHER SHOT!";
                             popup.style.display = "block";
                             overlay.style.display = "block";
                             isProcessing = false; // Unlock only after run it back has been pressed
                         } else {
-                            const redirectUrl = `/scratch-it/end/?tile=${encodeURIComponent(clickedSquare.imageSrc)}`;
+                            const redirectUrl = `/ScratchIT/end/?tile=${encodeURIComponent(clickedSquare.imageSrc)}`;
                             location.href = redirectUrl;
                         }
                         counter++;

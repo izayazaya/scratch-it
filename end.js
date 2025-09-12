@@ -12,18 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
     let messageOneClass = "";
     let messageTwoClass = ""; 
 
-    if (tile && (tile.includes("/scratch-it/assets/lanyard.png") || tile.includes("/scratch-it/assets/sticker.png"))) { 
+    if (tile && (tile.includes("/ScratchIT/assets/lanyard.png") || tile.includes("/ScratchIT/assets/sticker.png"))) { 
         messageOne = "CONGRATULATIONS!"; 
         messageTwo = "YOU WON!";
         messageThree = "PRIZE WON:";
-        if (tile.includes("/scratch-it/assets/lanyard.png")) {
+        if (tile.includes("/ScratchIT/assets/lanyard.png")) {
             messageFour = "LANYARD";
-        } else if (tile.includes("/scratch-it/assets/sticker.png")) {
+        } else if (tile.includes("/ScratchIT/assets/sticker.png")) {
             messageFour = "STICKER";
         }
         messageOneClass = "winText";
         messageTwoClass = "winText";
-    } else if (tile && tile.includes("/scratch-it/assets/try-again.png")) {
+    } else if (tile && tile.includes("/ScratchIT/assets/try-again.png")) {
         messageOne = "WOMP WOMP,";
         messageTwo = "BETTER LUCK</br>NEXT TIME!";
         messageOneClass = "loseText"; 
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <img id="endImage" src="${imageSrc}">
             <p class="messageTwo ${messageTwoClass}">${messageTwo}</p>
         </div>
-        ${tile && (tile.includes("/scratch-it/assets/lanyard.png") || tile.includes("/scratch-it/assets/sticker.png")) ? `
+        ${tile && (tile.includes("/ScratchIT/assets/lanyard.png") || tile.includes("/ScratchIT/assets/sticker.png")) ? `
             <p class="messageThree">${messageThree}</p>
             <p class="messageFour">${messageFour}</p>
         ` : ''}
@@ -49,14 +49,14 @@ document.addEventListener("DOMContentLoaded", () => {
     endMascot.id = "endMascot";
     if (endContainer) {
         const rect = endContainer.getBoundingClientRect();
-        if (tile && (tile.includes("/scratch-it/assets/lanyard.png") || tile.includes("/scratch-it/assets/sticker.png"))) { 
-            endMascot.src = "/scratch-it/assets/win.png";
+        if (tile && (tile.includes("/ScratchIT/assets/lanyard.png") || tile.includes("/ScratchIT/assets/sticker.png"))) { 
+            endMascot.src = "/ScratchIT/assets/win.png";
             endMascot.style.position = "absolute";
             endMascot.style.top = "0";
             endMascot.style.right = "0";
             endMascot.style.transform = "translate(45%, 10%)";
-        } else if (tile && tile.includes("/scratch-it/assets/try-again.png")) {
-            endMascot.src = "/scratch-it/assets/lose.png";
+        } else if (tile && tile.includes("/ScratchIT/assets/try-again.png")) {
+            endMascot.src = "/ScratchIT/assets/lose.png";
             endMascot.style.position = "absolute";
             endMascot.style.bottom = "0";
             endMascot.style.left = "0";
@@ -69,6 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.getElementById("finishButton").addEventListener("click", () => {
-        location.href = "/scratch-it/";
+        location.href = "/ScratchIT/";
     });
 });

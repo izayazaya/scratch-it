@@ -7,7 +7,7 @@ class CustomHeader extends HTMLElement {
                 <a class="logoLink" href="https://www.facebook.com/bucscircuits" target="_blank">
                   <img
                     id="logo"
-                    src="/scratch-it/assets/circuits-logo.png"
+                    src="/ScratchIT/assets/circuits-logo.png"
                     alt="college organization's logo"
                   />
                 </a>
@@ -27,8 +27,8 @@ class CustomFooter extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
           <div class="footerSection">
-            <a class="githubLink" href="https://github.com/izayazaya/scratch-it/" target="_blank">
-              <div class="githubContainer"><img id="github" src="/scratch-it/assets/github.png" alt="github logo"/></div>
+            <a class="githubLink" href="https://github.com/izayazaya/ScratchIT/" target="_blank">
+              <div class="githubContainer"><img id="github" src="/ScratchIT/assets/github.png" alt="github logo"/></div>
             </a>
             <p id="footer">© 2025 <a class="footerCircuits" href="https://www.facebook.com/bucscircuits" target="_blank">CircuITs</a></p>
           </div>
