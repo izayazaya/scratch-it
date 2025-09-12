@@ -12,18 +12,18 @@ document.addEventListener("DOMContentLoaded", () => {
     let messageOneClass = "";
     let messageTwoClass = ""; 
 
-    if (tile && (tile.includes("assets/lanyard.png") || tile.includes("assets/sticker.png"))) { 
+    if (tile && (tile.includes("/assets/lanyard.png") || tile.includes("/assets/sticker.png"))) { 
         messageOne = "CONGRATULATIONS!"; 
         messageTwo = "YOU WON!";
         messageThree = "PRIZE WON:";
-        if (tile.includes("assets/lanyard.png")) {
+        if (tile.includes("/assets/lanyard.png")) {
             messageFour = "LANYARD";
-        } else if (tile.includes("assets/sticker.png")) {
+        } else if (tile.includes("/assets/sticker.png")) {
             messageFour = "STICKER";
         }
         messageOneClass = "winText";
         messageTwoClass = "winText";
-    } else if (tile && tile.includes("assets/try-again.png")) {
+    } else if (tile && tile.includes("/assets/try-again.png")) {
         messageOne = "WOMP WOMP,";
         messageTwo = "BETTER LUCK</br>NEXT TIME!";
         messageOneClass = "loseText"; 
@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", () => {
             <img id="endImage" src="${imageSrc}">
             <p class="messageTwo ${messageTwoClass}">${messageTwo}</p>
         </div>
-        ${tile && (tile.includes("assets/lanyard.png") || tile.includes("assets/sticker.png")) ? `
+        ${tile && (tile.includes("/assets/lanyard.png") || tile.includes("/assets/sticker.png")) ? `
             <p class="messageThree">${messageThree}</p>
             <p class="messageFour">${messageFour}</p>
         ` : ''}
@@ -49,14 +49,14 @@ document.addEventListener("DOMContentLoaded", () => {
     endMascot.id = "endMascot";
     if (endContainer) {
         const rect = endContainer.getBoundingClientRect();
-        if (tile && (tile.includes("assets/lanyard.png") || tile.includes("assets/sticker.png"))) { 
-            endMascot.src = "assets/win.png";
+        if (tile && (tile.includes("/assets/lanyard.png") || tile.includes("/assets/sticker.png"))) { 
+            endMascot.src = "/assets/win.png";
             endMascot.style.position = "absolute";
             endMascot.style.top = "0";
             endMascot.style.right = "0";
             endMascot.style.transform = "translate(45%, 10%)";
-        } else if (tile && tile.includes("assets/try-again.png")) {
-            endMascot.src = "assets/lose.png";
+        } else if (tile && tile.includes("/assets/try-again.png")) {
+            endMascot.src = "/assets/lose.png";
             endMascot.style.position = "absolute";
             endMascot.style.bottom = "0";
             endMascot.style.left = "0";
@@ -69,6 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     document.getElementById("finishButton").addEventListener("click", () => {
-        location.href = "index.html";
+        location.href = "/";
     });
 });

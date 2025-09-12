@@ -7,7 +7,7 @@ class CustomHeader extends HTMLElement {
                 <a class="logoLink" href="https://www.facebook.com/bucscircuits" target="_blank">
                   <img
                     id="logo"
-                    src="./assets/circuits-logo.png"
+                    src="/assets/circuits-logo.png"
                     alt="college organization's logo"
                   />
                 </a>
@@ -28,7 +28,7 @@ class CustomFooter extends HTMLElement {
         this.innerHTML = `
           <div class="footerSection">
             <a class="githubLink" href="https://github.com/izayazaya/scratch-it/" target="_blank">
-              <div class="githubContainer"><img id="github" src="./assets/github.png" alt="github logo"/></div>
+              <div class="githubContainer"><img id="github" src="/assets/github.png" alt="github logo"/></div>
             </a>
             <p id="footer">© 2025 <a class="footerCircuits" href="https://www.facebook.com/bucscircuits" target="_blank">CircuITs</a></p>
           </div>
