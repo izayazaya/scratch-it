@@ -1,7 +1,7 @@
 # CircuITs Pick-IT
 
-Scratch-it web app
+Scratch-it Webapp
 
-Created for the BUCS CBO CircuITs
+Created for the BUCS DBO CircuITs
 
 **Gamba** amirite?
